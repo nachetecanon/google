@@ -8,15 +8,38 @@
                       #map_canvas { height: 100% }
                     </style>
                        <script type="text/javascript">
-                          function initialize() {
-                             var mapOptions = {
-                              center: new google.maps.LatLng(34.397, 250.644),
-                              zoom: 8,
-                              mapTypeId: google.maps.MapTypeId.ROADMAP
-                             };
-                             var map = new google.maps.Map(document.getElementById("map_canvas"),
-                                  mapOptions);
-                            }
+                             function initialize() {
+		                     var mapOptions = {
+		                      center: new google.maps.LatLng(34.397, 250.644),
+		                      zoom: 8,
+		                      mapTypeId: google.maps.MapTypeId.ROADMAP
+                             		};
+				     var map = new google.maps.Map(document.getElementById("map_canvas"),
+				          mapOptions);
+				     var marker=new google.maps.Marker({
+					position:map.getCenter(),
+					map: map,
+					title: 'Click para zoom'
+					});
+				     google.maps.event.addListener(marker,'click',function() {
+					map.setZoom(9);
+					map.setCenter(marker.getPosition());
+					});
+				     google.maps.event.addListener(map,'click',function(event) {
+					placeMarker(event.latLng);
+				     });
+				    function placeMarker(location) {
+					var marker=new google.maps.Marker({
+						position: location,
+						map: map});
+					map.setCenter(location);
+					var infoWindow=new google.maps.InfoWindow({content: 'mierda'});
+					google.maps.event.addListener(marker,'click',function() {
+					infoWindow.open(map,marker);
+				    	} );
+		                    }
+			    }
+			    
                             function loadScript() {
                                 var script = document.createElement("script");
                                   script.type = "text/javascript";
