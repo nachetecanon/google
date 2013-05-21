@@ -32,12 +32,25 @@
 					var marker=new google.maps.Marker({
 						position: location,
 						map: map});
-					map.setCenter(location);
+					map.setCenter(location);alert(location);
 					var infoWindow=new google.maps.InfoWindow({content: 'mierda'});
 					google.maps.event.addListener(marker,'click',function() {
 					infoWindow.open(map,marker);
 				    	} );
 		                    }
+				    var points = [
+					new google.maps.LatLng(34.0771, -109.8906),
+					new google.maps.LatLng(34.0631, -109.1763),
+					new google.maps.LatLng(34.0485, -109.2568),
+					];
+					// Create a new polyline and instantly add it to the map
+				    var polyline = new google.maps.Polyline({
+					path: points,
+					strokeColor: '#ff0000',
+					strokeWeight: 5,
+					strokeOpacity: 0.7,
+					map: map
+					});
 			    }
 			    
                             function loadScript() {
